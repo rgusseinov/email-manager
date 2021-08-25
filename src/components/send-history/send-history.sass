@@ -1,0 +1,38 @@
+.history
+  margin: 50px 0 0 0
+  h2
+    font-size: 24px
+
+  &__status-success
+    color: #03A100
+  &__status-in-progress
+    color: #C4C4C4
+  &__status-error
+    color: #FF6666
+    
+
+  .container
+      max-width: 740px
+      margin: 0 auto
+
+
+.history__table
+  display: flex
+  flex-direction: column
+
+  tr
+    display: flex
+    
+    td:nth-child(1)
+      flex: 1 1 100px
+    td:nth-child(2)
+      flex: 1 1 490px
+    td:nth-child(3)
+      flex: 1 1 100px
+   
+
+.history__table-header
+  color: #C4C4C4
+  border-bottom: 1px solid #C4C4C4
+  margin: 10px 0
+  padding: 10px 0

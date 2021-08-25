@@ -1,0 +1,72 @@
+.container__main-block
+  background: #FFFFFF
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1)
+  border-radius: 5px
+  margin-top: 20px
+  
+  h1
+    color: rgba(0, 0, 0, 1)
+    font-size: 30px
+    font-weight: 500
+    margin: 0 0 20px
+
+.main-block
+  &__wrapper
+    padding: 30px
+  
+.form-row
+  margin-bottom: 20px
+
+  &__label
+    color: rgb(0, 0, 0, 0.6)
+    font-size: 16px
+
+  &__group
+    display: flex
+
+  &__input
+    width: 350px
+    height: 35px
+    border: 1px solid #ddd
+    padding-left: 10px
+    margin-top: 5px
+
+
+.form-row
+  &__input
+    &.full
+      border-radius: 5px
+    &.left
+      border-top-left-radius: 5px
+      border-bottom-left-radius: 5px
+    &.right
+      border-top-right-radius: 5px
+      border-bottom-right-radius: 5px
+        
+
+  input[name="subject"]
+    border-radius: 5px
+    width: 715px !important
+
+
+  input[type="button"]
+      height: 40px
+      padding: 0 25px
+      border-radius: 5px
+      background: linear-gradient(180deg, #45A6FF 0%, #0055FB 100%), #C4C4C4
+      color: #fff
+      border: 0
+      font-size: 18px
+
+    
+  textarea[name="message"]
+    border-radius: 5px
+    width: 720px !important
+    height: 140px
+    padding: 10px
+    margin-top: 5px
+    border: 1px solid #ddd
+
+    &:focus
+      border: 1px solid #2e74ff
+      outline: none
