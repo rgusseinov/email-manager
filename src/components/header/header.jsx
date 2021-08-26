@@ -8,12 +8,14 @@ import Rectangle2 from '../../assets/images/Rectanglerectangle-2.svg'
 function Header(){
   return (
     <div className="header">
-      <div className="header-logo">
-        <img src={Ellipse} className="header-logo__part"/>
-        <img src={Rectangle} className="header-logo__part"/>
-        <img src={Ellipse} className="header-logo__part"/>
-        <img src={Rectangle2} className="header-logo__part"/>        
-      </div>   
+      <div className="container">
+        <div className="header_row">
+          <img src={Ellipse} className="header-logo__part" alt="" />
+          <img src={Rectangle} className="header-logo__part" alt=""/>
+          <img src={Ellipse} className="header-logo__part" alt=""/>
+          <img src={Rectangle2} className="header-logo__part" alt=""/>
+        </div>
+      </div>
     </div>
   );
 }

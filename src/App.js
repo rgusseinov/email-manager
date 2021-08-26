@@ -1,15 +1,15 @@
 import './App.sass';
 import Header from './components/header/header';
 import Main from './components/main/main';
-import SendHistory from './components/send-history/send-history';
+import MessageStatus from './components/send-history/send-history';
 
 function App() {
   return (
       <div className="app">
-        <div className="container">
+        <div className="content">
           <Header />
           <Main />
-          <SendHistory />
+          <MessageStatus />
         </div>
       </div>
   );

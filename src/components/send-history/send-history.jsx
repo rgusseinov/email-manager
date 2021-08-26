@@ -1,7 +1,7 @@
 import React from 'react'
 import './send-history.sass';
 
-function SendHistory(){
+function MessageStatus(){
   return (
     <div className="history">
 
@@ -35,10 +35,10 @@ function SendHistory(){
         </table>
 
       </div>  
-    
     </div>
     
+
   );
 }
 
-export default SendHistory;
+export default MessageStatus;
