@@ -7,19 +7,22 @@ function Main(){
   return (
     <div className="main">
       <div className="container">
+
         <div className="main__title">Отправлялка сообщений</div>        
           
           <div className="main__row">
             <label className="main__label"> От кого </label>
             <div className="main__field-row">
+
               <div className="main__field-group">
-                <input name="senderName" className="main__field-group-left" placeholder="Имя" />
+                <input type="text" name="senderName" className="main__field-group-left" placeholder="Имя" />
                 <div className="main__message info"> </div>
               </div>
               <div className="main__field-group">
-                <input name="senderEmail" className="main__field-group-right" placeholder="Email" /> 
-                <div className="main__message error"> Email не может быть пустым </div>
+                <input type="text" name="senderEmail" className="main__field-group-right" placeholder="Email" /> 
+                <div className="main__message error"> </div>
               </div>
+              
             </div>       
           </div>
 
@@ -27,11 +30,11 @@ function Main(){
             <label className="main__label"> Кому </label>
             <div className="main__field-row">
               <div className="main__field-group">
-                <input name="senderName" className="main__field-group-left" placeholder="Имя" />
+                <input type="text" name="senderName" className="main__field-group-left" placeholder="Имя" />
                 <div className="main__message-info"> </div>
               </div>
               <div className="main__field-group">
-                <input name="senderEmail" className="main__field-group-right" placeholder="Email" /> 
+                <input type="text" name="senderEmail" className="main__field-group-right" placeholder="Email" /> 
                 <div className="main__message-success"> </div>
               </div>
             </div>       
@@ -41,7 +44,7 @@ function Main(){
             <label className="main__label"> Тема письма </label>
             <div className="main__field-row">
               <div className="main__field-group single">
-                <input name="senderName" className="main__field-group-single" placeholder="Моя тема письма" />
+                <input type="text" name="senderName" className="main__field-group-single" placeholder="Моя тема письма" />
                 <div className="main__message-info"> </div>
               </div>
             </div>       
@@ -131,6 +134,22 @@ function Main(){
           </div>
 
       </div>
+
+      <div className="overlay">
+        <div className="overlay__content">
+
+          <div className="overlay__row">
+            <h3 className="overlay__title"> Бросайте файлы сюда, я ловлю </h3>
+            <p className="overlay__text">
+              Мы принимаем картинки (jpg, png, gif), офисные файлы (doc, xls, pdf) 
+              и zip-архивы. <br /> Размеры файла до 5 МБ
+            </p>
+          </div>
+          
+        </div>        
+      </div>
+
+      
     </div>
   );
 }
