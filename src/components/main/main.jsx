@@ -135,10 +135,9 @@ function Main(){
 
       </div>
 
-      <div className="overlay">
+{/*       <div className="overlay">
         <div className="overlay__content">
 
-          <div className="overlay__row">
             <h3 className="overlay__title"> Бросайте файлы сюда, я ловлю </h3>
             <p className="overlay__text">
               Мы принимаем картинки (jpg, png, gif), офисные файлы (doc, xls, pdf) 
@@ -148,7 +147,7 @@ function Main(){
           
         </div>        
       </div>
-
+ */}
       
     </div>
   );
