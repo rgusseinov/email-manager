@@ -1,12 +1,12 @@
 import React from 'react'
-// import '../../scss/send-history.scss';
+import '../../scss/send-history.scss';
 
-function MessageStatus(){
+function MessageStatus() {
   return (
     <div className="history">
 
       <div className="container">
-      <h2> Отправленные сообщения </h2>
+        <h2> Отправленные сообщения </h2>
 
         <table className="history__table">
           <tr className="history__table-header">
@@ -14,7 +14,7 @@ function MessageStatus(){
             <td className="history__table-subject"> Тема </td>
             <td className="history__table-status"> Статус </td>
           </tr>
-          
+
           <tr>
             <td> 30 сентября </td>
             <td> Тема письма, которая не поместится в эту строку, потому что </td>
@@ -34,9 +34,9 @@ function MessageStatus(){
           </tr>
         </table>
 
-      </div>  
+      </div>
     </div>
-    
+
 
   );
 }
