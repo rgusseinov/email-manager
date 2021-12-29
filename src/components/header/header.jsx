@@ -1,8 +1,8 @@
 import React from 'react';
-import Ellipse from '../../assets/images/Ellipseellipse.svg'
-import Rectangle from '../../assets/images/Rectanglerectanble.svg'
-import Rectangle2 from '../../assets/images/Rectanglerectangle-2.svg'
-import '../../scss/header.scss'
+import Ellipse from '../../assets/images/Ellipseellipse.svg';
+import Rectangle from '../../assets/images/Rectanglerectanble.svg';
+import Rectangle2 from '../../assets/images/Rectanglerectangle-2.svg';
+import '../../scss/header.scss';
 
 function Header() {
   return (
