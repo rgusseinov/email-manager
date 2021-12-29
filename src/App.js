@@ -5,13 +5,13 @@ import '../src/scss/app.scss';
 
 function App() {
   return (
-      <div className="app">
-        <div className="content">
-          <Header />
-          <Main />
-          <MessageStatus />
-        </div>
+    <div className="app">
+      <div className="content">
+        <Header />
+        <Main />
+        <MessageStatus />
       </div>
+    </div>
   );
 }
 

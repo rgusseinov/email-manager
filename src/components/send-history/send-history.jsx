@@ -1,10 +1,9 @@
-import React from 'react'
+import React from 'react';
 import '../../scss/send-history.scss';
 
 function MessageStatus() {
   return (
     <div className="history">
-
       <div className="container">
         <h2> Отправленные сообщения </h2>
 
@@ -33,11 +32,8 @@ function MessageStatus() {
             <td className="history__status-error"> Ошибка </td>
           </tr>
         </table>
-
       </div>
     </div>
-
-
   );
 }
 
