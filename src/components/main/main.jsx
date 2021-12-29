@@ -1,7 +1,7 @@
 import React from 'react'
-import './main.sass';
 import attachmentIcon from '../../assets/images/attachment.svg';
 import removeIcon from '../../assets/images/trash.svg';
+import '../../scss/main.scss';
 
 function Main(){
   return (
@@ -20,7 +20,7 @@ function Main(){
               </div>
               <div className="main__field-group">
                 <input type="text" name="senderEmail" className="main__field-group-right" placeholder="Email" /> 
-                <div className="main__message error"> </div>
+                <div className="main__message error">Email не может быть пуст </div>
               </div>
               
             </div>       

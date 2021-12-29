@@ -1,5 +1,5 @@
 import React from 'react'
-import './send-history.sass';
+// import '../../scss/send-history.scss';
 
 function MessageStatus(){
   return (

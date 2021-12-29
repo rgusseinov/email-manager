@@ -1,0 +1,16 @@
+.header {
+  padding: 40px 0 20px 0;
+}
+.header_row {
+  display: flex;
+  
+  .header_row img {
+    padding-left: 10px
+  }
+  .header_row img:first-child {
+    padding-left: 0;
+  }
+  img:last-child {
+    padding-left: 0;
+  }
+}

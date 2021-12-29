@@ -1,7 +1,7 @@
-import './App.sass';
 import Header from './components/header/header';
 import Main from './components/main/main';
-import MessageStatus from './components/send-history/send-history';
+// import MessageStatus from './components/send-history/send-history';
+import '../src/scss/app.scss';
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
         <div className="content">
           <Header />
           <Main />
-          <MessageStatus />
+          {/* <MessageStatus /> */}
         </div>
       </div>
   );
