@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import attachmentIcon from '../../assets/images/attachment.svg';
-import removeIcon from '../../assets/images/trash.svg';
+// import removeIcon from '../../assets/images/trash.svg';
 import '../../scss/main.scss';
+import { validate } from '../../utils/form';
 
 function Main() {
   const [field, setField] = useState({});
-  // const [error, setError] = useState({});
+  const [error, setError] = useState({});
 
   const handleFormChange = (e) => {
     const fieldName = e.target.name;
@@ -15,8 +16,17 @@ function Main() {
       ...state,
       [fieldName]: fieldValue
     }));
+  };
 
-    console.log(`field`, field);
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const { isValid, errors } = validate(field);
+
+    if (isValid) {
+      console.log(`Success! All fields properly filled.`);
+    } else {
+      setError(errors);
+    }
   };
 
   return (
@@ -24,7 +34,7 @@ function Main() {
       <div className="container">
         <div className="main__title">Отправлялка сообщений</div>
 
-        <form onChange={handleFormChange}>
+        <form onChange={handleFormChange} onSubmit={handleFormSubmit}>
           <div className="main__row">
             <label className="main__label"> От кого </label>
             <div className="main__field-row">
@@ -35,7 +45,7 @@ function Main() {
                   className="main__field-group-left"
                   placeholder="Имя"
                 />
-                <div className="main__message info"></div>
+                <div className="main__message error">{error['sendByName']}</div>
               </div>
               <div className="main__field-group">
                 <input
@@ -44,7 +54,7 @@ function Main() {
                   className="main__field-group-right"
                   placeholder="Email"
                 />
-                <div className="main__message error"></div>
+                <div className="main__message error">{error['sendByEmail']}</div>
               </div>
             </div>
           </div>
@@ -59,7 +69,7 @@ function Main() {
                   className="main__field-group-left"
                   placeholder="Имя"
                 />
-                <div className="main__message-info"> </div>
+                <div className="main__message error">{error['sendToName']}</div>
               </div>
               <div className="main__field-group">
                 <input
@@ -68,7 +78,7 @@ function Main() {
                   className="main__field-group-right"
                   placeholder="Email"
                 />
-                <div className="main__message-success"> </div>
+                <div className="main__message error">{error['sendToEmail']}</div>
               </div>
             </div>
           </div>
@@ -83,7 +93,7 @@ function Main() {
                   className="main__field-group-single"
                   placeholder="Моя тема письма"
                 />
-                <div className="main__message-info"> </div>
+                <div className="main__message error">{error['subject']}</div>
               </div>
             </div>
           </div>
@@ -93,11 +103,20 @@ function Main() {
             <div className="main__field-row">
               <div className="main__field-group single">
                 <textarea className="main__field-group-single" name="message"></textarea>
-                <div className="main__message-info"> </div>
+                <div className="main__message error">{error['message']}</div>
               </div>
             </div>
           </div>
 
+          <div className="main__row">
+            <div className="main__field-row">
+              <div className="main__field-group">
+                <div className="main__field-group-button">
+                  <button className="field-group__button normal"> Отправить </button>
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="main__row">
             <div className="upload">
               <div className="upload__item">
@@ -111,7 +130,7 @@ function Main() {
             </div>
           </div>
         </form>
-        <div className="main__row">
+        {/* <div className="main__row">
           <div className="attachment">
             <div className="attachment__item">
               <div className="attachment__row">
@@ -138,9 +157,9 @@ function Main() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
-        <div className="main__row">
+        {/* <div className="main__row">
           <div className="main__field-row">
             <div className="main__field-group">
               <div className="main__field-group-button">
@@ -160,7 +179,7 @@ function Main() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* <div className="overlay">
