@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { createRef, useState } from 'react';
 import attachmentIcon from '../../assets/images/attachment.svg';
 // import removeIcon from '../../assets/images/trash.svg';
 import '../../scss/main.scss';
@@ -7,7 +7,20 @@ import { validate } from '../../utils/form';
 function Main() {
   const [field, setField] = useState({});
   const [error, setError] = useState({});
+  const fileRef = createRef();
+  // Drang & Drop handlers
+  // 2. Normal select areas
+  const handleSelectFile = () => fileRef.current.click();
 
+  const handleSelectFileChange = (evt) => {
+    const { files } = evt.target;
+
+    Array.from(files).forEach((file) => {
+      console.log(file);
+    });
+  };
+
+  // Form field handlers
   const handleFormChange = (e) => {
     const fieldName = e.target.name;
     const fieldValue = e.target.value;
@@ -117,6 +130,7 @@ function Main() {
               </div>
             </div>
           </div>
+
           <div className="main__row">
             <div className="upload">
               <div className="upload__item">
@@ -124,73 +138,22 @@ function Main() {
                   <div className="upload__image">
                     <img src={attachmentIcon} alt="" />
                   </div>
-                  <div className="upload__title hover"> Прикрепить файл </div>
+                  <input
+                    type="file"
+                    ref={fileRef}
+                    onChange={handleSelectFileChange}
+                    className="upload__file"
+                    multiple
+                  />
+                  <div className="upload__title hover" onClick={handleSelectFile}>
+                    Прикрепить файл
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </form>
-        {/* <div className="main__row">
-          <div className="attachment">
-            <div className="attachment__item">
-              <div className="attachment__row">
-                <div className="attachment__image">
-                  <img src={attachmentIcon} alt="" />
-                  <span> File01.jpg </span>
-                </div>
-                <div className="attachment__icon">
-                  <img src={removeIcon} alt="" />
-                  <span> Удалить </span>
-                </div>
-              </div>
-            </div>
-            <div className="attachment__item">
-              <div className="attachment__row">
-                <div className="attachment__image">
-                  <img src={attachmentIcon} alt="" />
-                  <span> Семантические файлы.jpg </span>
-                </div>
-                <div className="attachment__icon">
-                  <img src={removeIcon} alt="" />
-                  <span> Удалить </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
-
-        {/* <div className="main__row">
-          <div className="main__field-row">
-            <div className="main__field-group">
-              <div className="main__field-group-button">
-                <button className="field-group__button normal"> Отправить </button>
-              </div>
-              <br />
-              <div className="main__field-group-button">
-                <button className="field-group__button hover"> Отправить </button>
-              </div>
-              <br />
-              <div className="main__field-group-button">
-                <button className="field-group__button active"> Отправить </button>
-              </div>
-              <br />
-              <div className="main__field-group-button">
-                <button className="field-group__button disabled"> Отправить </button>
-              </div>
-            </div>
-          </div>
-        </div> */}
       </div>
-
-      {/* <div className="overlay">
-        <div className="overlay__content">
-          <h3 className="overlay__title"> Бросайте файлы сюда, я ловлю </h3>
-          <p className="overlay__text">
-            Мы принимаем картинки (jpg, png, gif), офисные файлы (doc, xls, pdf)
-            и zip-архивы. <br /> Размеры файла до 5 МБ
-          </p>
-        </div>
-      </div> */}
     </div>
   );
 }
