@@ -1,12 +1,14 @@
 import React, { createRef, useState } from 'react';
 import attachmentIcon from '../../assets/images/attachment.svg';
 // import removeIcon from '../../assets/images/trash.svg';
-import '../../scss/main.scss';
 import { validate } from '../../utils/form';
+import '../../scss/main.scss';
+import AttachmentItem from './attachmentItem';
 
 function Main() {
   const [field, setField] = useState({});
   const [error, setError] = useState({});
+  const [fileList, setFileList] = useState([]);
   const fileRef = createRef();
   // Drang & Drop handlers
   // 2. Normal select areas
@@ -15,8 +17,14 @@ function Main() {
   const handleSelectFileChange = (evt) => {
     const { files } = evt.target;
 
+    const fileListArr = [];
     Array.from(files).forEach((file) => {
-      console.log(file);
+      fileListArr.push(file);
+      // console.log(file);
+    });
+
+    setFileList((prevState) => {
+      return [...prevState, ...fileListArr];
     });
   };
 
@@ -41,7 +49,7 @@ function Main() {
       setError(errors);
     }
   };
-
+  // console.log(`fileList`, fileList);
   return (
     <div className="main">
       <div className="container">
@@ -152,6 +160,9 @@ function Main() {
               </div>
             </div>
           </div>
+          {fileList.map((file, index) => (
+            <AttachmentItem key={index} file={file} />
+          ))}
         </form>
       </div>
     </div>

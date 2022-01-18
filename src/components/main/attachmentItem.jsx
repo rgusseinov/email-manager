@@ -1,18 +1,10 @@
 import React from 'react';
 
-function attachmentItem() {
-  /* const reader = new FileReader();
-  reader.readAsDataURL(file);
-
-  reader.onload = function (e) {
-    const src = e.target.result;
-  } */
-
-  return (
-    <div>
-      <img src={""} />
-    </div>
-  );
+// eslint-disable-next-line react/prop-types
+function AttachmentItem(file) {
+  console.log(`file`, file.file);
+  const fileData = file.file;
+  return <div>{fileData.name}</div>;
 }
 
-export default attachmentItem;
+export default AttachmentItem;
