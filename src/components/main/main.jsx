@@ -1,31 +1,64 @@
-import React, { createRef, useState } from 'react';
+import React, { createRef, useEffect, useState } from 'react';
 import attachmentIcon from '../../assets/images/attachment.svg';
 // import removeIcon from '../../assets/images/trash.svg';
 import { validate } from '../../utils/form';
-import '../../scss/main.scss';
 import AttachmentItem from './attachmentItem';
+import '../../scss/main.scss';
 
 function Main() {
   const [field, setField] = useState({});
   const [error, setError] = useState({});
   const [fileList, setFileList] = useState([]);
   const fileRef = createRef();
+  const uploadAreaRef = createRef();
+
+  useEffect(() => {
+    // console.log(`uploadAreaRef`, uploadAreaRef.current);
+  });
+
   // Drang & Drop handlers
   // 2. Normal select areas
   const handleSelectFile = () => fileRef.current.click();
 
   const handleSelectFileChange = (evt) => {
-    const { files } = evt.target;
-
     const fileListArr = [];
-    Array.from(files).forEach((file) => {
+
+    const files = Array.from(evt.target.files);
+
+    files.forEach((file) => {
       fileListArr.push(file);
-      // console.log(file);
     });
 
     setFileList((prevState) => {
       return [...prevState, ...fileListArr];
     });
+  };
+
+  // Drag & Drop handlers
+
+  const preventDefaults = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const { files } = e.dataTransfer;
+
+    const fileListArr = [];
+    let fileList = Array.from(files);
+
+    fileList.forEach((file) => {
+      fileListArr.push(file);
+    });
+
+    // console.log(files);
+
+    setFileList((prevState) => {
+      return [...prevState, ...fileListArr];
+    });
+
+    // console.log(`files`, files);
   };
 
   // Form field handlers
@@ -138,9 +171,15 @@ function Main() {
               </div>
             </div>
           </div>
-
+          {/* 'dragenter', 'dragover', 'dragleave', 'drop'] */}
           <div className="main__row">
-            <div className="upload">
+            <div
+              className="upload"
+              ref={uploadAreaRef}
+              onDragEnter={preventDefaults}
+              onDragOver={preventDefaults}
+              onDragLeave={preventDefaults}
+              onDrop={handleDrop}>
               <div className="upload__item">
                 <div className="upload__row">
                   <div className="upload__image">
