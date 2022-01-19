@@ -1,6 +1,5 @@
-import React, { createRef, useEffect, useState } from 'react';
+import React, { createRef, useState } from 'react';
 import attachmentIcon from '../../assets/images/attachment.svg';
-// import removeIcon from '../../assets/images/trash.svg';
 import { validate } from '../../utils/form';
 import AttachmentItem from './attachmentItem';
 import '../../scss/main.scss';
@@ -11,18 +10,14 @@ function Main() {
   const [fileList, setFileList] = useState([]);
   const fileRef = createRef();
   const uploadAreaRef = createRef();
-
-  useEffect(() => {
-    // console.log(`uploadAreaRef`, uploadAreaRef.current);
-  });
+  const overlayRef = createRef();
 
   // Drang & Drop handlers
-  // 2. Normal select areas
+  // 1. Normal select areas
   const handleSelectFile = () => fileRef.current.click();
 
   const handleSelectFileChange = (evt) => {
     const fileListArr = [];
-
     const files = Array.from(evt.target.files);
 
     files.forEach((file) => {
@@ -34,16 +29,28 @@ function Main() {
     });
   };
 
-  // Drag & Drop handlers
-
+  // 2. Drag & Drop handlers
   const preventDefaults = (e) => {
     e.preventDefault();
     e.stopPropagation();
   };
 
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    overlayRef.current.classList.remove('hide');
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    if (!overlayRef.current.classList.contains('hide')) {
+      overlayRef.current.classList.add('hide');
+    }
+  };
+
   const handleDrop = (e) => {
     e.preventDefault();
     const { files } = e.dataTransfer;
+    overlayRef.current.classList.add('hide');
 
     const fileListArr = [];
     let fileList = Array.from(files);
@@ -52,13 +59,9 @@ function Main() {
       fileListArr.push(file);
     });
 
-    // console.log(files);
-
     setFileList((prevState) => {
       return [...prevState, ...fileListArr];
     });
-
-    // console.log(`files`, files);
   };
 
   // Form field handlers
@@ -78,13 +81,22 @@ function Main() {
 
     if (isValid) {
       console.log(`Success! All fields properly filled.`);
+      setError({});
     } else {
       setError(errors);
     }
   };
-  // console.log(`fileList`, fileList);
+
+  const handleRemoveAttachment = (e) => {
+    if (e.target.parentElement.dataset.id) {
+      const fileId = Number(e.target.parentElement.dataset.id);
+      const filteredItems = fileList.filter((file) => file.lastModified !== fileId);
+      setFileList(filteredItems);
+    }
+  };
+
   return (
-    <div className="main">
+    <div className="main" onDragOver={handleDragOver}>
       <div className="container">
         <div className="main__title">Отправлялка сообщений</div>
 
@@ -171,7 +183,6 @@ function Main() {
               </div>
             </div>
           </div>
-          {/* 'dragenter', 'dragover', 'dragleave', 'drop'] */}
           <div className="main__row">
             <div
               className="upload"
@@ -199,10 +210,34 @@ function Main() {
               </div>
             </div>
           </div>
-          {fileList.map((file, index) => (
-            <AttachmentItem key={index} file={file} />
-          ))}
+          <div className="main__row">
+            <div className="attachment">
+              {fileList.map((file, index) => (
+                <AttachmentItem
+                  key={index}
+                  file={file}
+                  onRemoveAttachment={handleRemoveAttachment}
+                />
+              ))}
+            </div>
+          </div>
         </form>
+      </div>
+
+      <div
+        ref={overlayRef}
+        className="overlay hide"
+        onDragEnter={preventDefaults}
+        onDragOver={preventDefaults}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}>
+        <div className="overlay__content">
+          <h3 className="overlay__title"> Бросайте файлы сюда, я ловлю </h3>
+          <p className="overlay__text">
+            Мы принимаем картинки (jpg, png, gif), офисные файлы (doc, xls, pdf) и zip-архивы.
+            Размеры файла до 5 МБ
+          </p>
+        </div>
       </div>
     </div>
   );

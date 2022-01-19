@@ -112,6 +112,10 @@
   height: 100%;
   background-color: rgba(255, 255, 255, 0.9);
 
+  &.hide {
+    display: none;
+  }
+
   &__content {
     max-width: 790px;
     margin: 0 auto;
@@ -192,6 +196,7 @@
 
 /* File uploading */
 .upload {
+  
   &__row {
     display: flex;
     align-items: center;
@@ -223,8 +228,8 @@
 /* Attachments */
 .attachment {
   display: flex;
-  justify-content: space-between;
-
+  flex-wrap: wrap;
+  
   &__row {
     display: flex;
     justify-content: space-between;
@@ -234,6 +239,10 @@
     border: 1px solid #ddd;
     border-radius: 5px;
     flex-basis: 360px;
+    margin-bottom: 10px;
+  }
+  &__item:nth-child(odd) {
+    margin-right: 10px;
   }
   &__image {
     display: flex;
