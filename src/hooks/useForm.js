@@ -1,14 +1,11 @@
-import { createRef, useState } from 'react';
+import { useState } from 'react';
 import { validate } from '../utils/form';
 
-const useForms = () => {
+const useForms = (fileRef, overlayRef) => {
   const [field, setField] = useState({});
   const [error, setError] = useState({});
   const [fileList, setFileList] = useState([]);
-  const fileRef = createRef();
-  const overlayRef = createRef();
 
-  console.log(`ref`, fileRef.current);
   // Drang & Drop handlers
   // 1. Normal select areas
   const handleSelectFile = () => fileRef.current.click();

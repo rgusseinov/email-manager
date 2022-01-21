@@ -1,25 +1,27 @@
 import React from 'react';
 import useForms from '../../hooks/useForm';
 import attachmentIcon from '../../assets/images/attachment.svg';
-import AttachmentItem from './attachmentItem';
+import AttachmentItem from './attachment-item';
+import { createRef } from 'react/cjs/react.development';
+import DropZone from './drop-zone';
 import '../../scss/main.scss';
 
 function Main() {
+  const fileRef = createRef();
+  const overlayRef = createRef();
   const {
     error,
     handleDragOver,
+    handleDragLeave,
     handleDrop,
     handleSelectFile,
     handleSelectFileChange,
     handleFormChange,
     handleFormSubmit,
-    handleDragLeave,
     handleRemoveAttachment,
     preventDefaults,
-    fileRef,
-    overlayRef,
     fileList
-  } = useForms();
+  } = useForms(fileRef, overlayRef);
   return (
     <div className="main" onDragOver={handleDragOver}>
       <div className="container">
@@ -147,22 +149,13 @@ function Main() {
           </div>
         </form>
       </div>
-
-      <div
-        ref={overlayRef}
-        className="overlay hide"
+      <DropZone
+        overlayRef={overlayRef}
         onDragEnter={preventDefaults}
         onDragOver={preventDefaults}
         onDragLeave={handleDragLeave}
-        onDrop={handleDrop}>
-        <div className="overlay__content">
-          <h3 className="overlay__title"> Бросайте файлы сюда, я ловлю </h3>
-          <p className="overlay__text">
-            Мы принимаем картинки (jpg, png, gif), офисные файлы (doc, xls, pdf) и zip-архивы.
-            Размеры файла до 5 МБ
-          </p>
-        </div>
-      </div>
+        onDrop={handleDrop}
+      />
     </div>
   );
 }
