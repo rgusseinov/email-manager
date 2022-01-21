@@ -22,6 +22,7 @@ function Main() {
     preventDefaults,
     fileList
   } = useForms(fileRef, overlayRef);
+
   return (
     <div className="main" onDragOver={handleDragOver}>
       <div className="container">
@@ -151,6 +152,7 @@ function Main() {
       </div>
       <DropZone
         overlayRef={overlayRef}
+        preventDefaults={preventDefaults}
         onDragEnter={preventDefaults}
         onDragOver={preventDefaults}
         onDragLeave={handleDragLeave}

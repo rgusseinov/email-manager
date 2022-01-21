@@ -29,11 +29,14 @@ const useForms = (fileRef, overlayRef) => {
     e.stopPropagation();
   };
 
+  // Show drag & drop zone
   const handleDragOver = (e) => {
     e.preventDefault();
+    // console.log(`drag over: `, e);
     overlayRef.current.classList.remove('hide');
   };
 
+  // Close drag & drop zone
   const handleDragLeave = (e) => {
     e.preventDefault();
     if (!overlayRef.current.classList.contains('hide')) {
@@ -43,6 +46,7 @@ const useForms = (fileRef, overlayRef) => {
 
   const handleDrop = (e) => {
     e.preventDefault();
+    // console.log(`source: ${e.target.classList}`);
     const { files } = e.dataTransfer;
     overlayRef.current.classList.add('hide');
 

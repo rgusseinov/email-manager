@@ -3,8 +3,11 @@ import removeIcon from '../../assets/images/trash.svg';
 import attachmentIcon from '../../assets/images/attachment.svg';
 
 function AttachmentItem({ file, onRemoveAttachment }) {
+  const onDragStart = () => {
+    // console.log(`drag start: ${e.target.className}`);
+  };
   return (
-    <div className="attachment__item" onClick={onRemoveAttachment}>
+    <div className="attachment__item" onClick={onRemoveAttachment} onDragStart={onDragStart}>
       <div className="attachment__row">
         <div className="attachment__image">
           <img src={attachmentIcon} alt="Файл" />
