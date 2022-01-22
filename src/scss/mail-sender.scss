@@ -196,7 +196,6 @@
 
 /* File uploading */
 .upload {
-  
   &__row {
     display: flex;
     align-items: center;
@@ -219,6 +218,10 @@
       color: rgba(0, 85, 251, 1);
     }
   }
+  &__limit {
+    padding-left: 10px;
+    color: red;
+  }
 
   &__file {
     display: none;
@@ -229,7 +232,7 @@
 .attachment {
   display: flex;
   flex-wrap: wrap;
-  
+
   &__row {
     display: flex;
     justify-content: space-between;

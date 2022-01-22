@@ -1,5 +1,5 @@
-
-{/* <div className="main__row">
+{
+  /* <div className="main__row">
           <div className="attachment">
             <div className="attachment__item">
               <div className="attachment__row">
@@ -26,9 +26,11 @@
               </div>
             </div>
           </div>
-        </div> */}
+        </div> */
+}
 
-{/* <div className="main__row">
+{
+  /* <div className="main__row">
           <div className="main__field-row">
             <div className="main__field-group">
               <div className="main__field-group-button">
@@ -48,10 +50,12 @@
               </div>
             </div>
           </div>
-        </div> */}
+        </div> */
+}
 // </div >
 
-{/* <div className="overlay">
+{
+  /* <div className="overlay">
 					<div className="overlay__content">
 						<h3 className="overlay__title"> Бросайте файлы сюда, я ловлю </h3>
 						<p className="overlay__text">
@@ -59,4 +63,5 @@
 							и zip-архивы. <br /> Размеры файла до 5 МБ
 						</p>
 					</div>
-				</div> */}
+				</div> */
+}

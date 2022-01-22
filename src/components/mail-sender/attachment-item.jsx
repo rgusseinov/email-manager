@@ -10,8 +10,8 @@ function AttachmentItem({ file, onRemoveAttachment }) {
     <div className="attachment__item" onClick={onRemoveAttachment} onDragStart={onDragStart}>
       <div className="attachment__row">
         <div className="attachment__image">
-          <img src={attachmentIcon} alt="Файл" />
-          <span> {file.name} </span>
+          <img src={attachmentIcon} alt="Файл" draggable="false" />
+          <span draggable="false"> {file.name} </span>
         </div>
         <div className="attachment__icon" data-id={`${file.lastModified}`}>
           <img src={removeIcon} className="icon" alt="Удалить" />

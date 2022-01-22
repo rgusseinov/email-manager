@@ -1,9 +1,8 @@
-import { emailPattern } from '../utils/email';
+import { emailPattern, MIN_INPUT_LENGTH } from '../utils/email';
 
 export const validate = (field) => {
   let isValid = true;
   let errors = {};
-  const MIN_INPUT_LENGTH = 5;
 
   if (!field['sendByName'] || field['sendByName'].length < MIN_INPUT_LENGTH) {
     errors['sendByName'] = 'Please type sender name';

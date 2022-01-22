@@ -4,13 +4,14 @@ import attachmentIcon from '../../assets/images/attachment.svg';
 import AttachmentItem from './attachment-item';
 import { createRef } from 'react/cjs/react.development';
 import DropZone from './drop-zone';
-import '../../scss/main.scss';
+import '../../scss/mail-sender.scss';
 
-function Main() {
+function MailSender() {
   const fileRef = createRef();
   const overlayRef = createRef();
   const {
     error,
+    attachmentsLimitInfo,
     handleDragOver,
     handleDragLeave,
     handleDrop,
@@ -22,7 +23,7 @@ function Main() {
     preventDefaults,
     fileList
   } = useForms(fileRef, overlayRef);
-
+  console.log(fileList);
   return (
     <div className="main" onDragOver={handleDragOver}>
       <div className="container">
@@ -134,6 +135,17 @@ function Main() {
                     Прикрепить файл
                   </div>
                 </div>
+                <div className="upload__row">
+                  <div className="upload__limit">
+                    {attachmentsLimitInfo.noOfAttachmentsExceededLimit
+                      ? `Максимальный размер одного файла не должен превышать 5 МБ`
+                      : ''}
+                    <br />
+                    {attachmentsLimitInfo.allowedAttachmentsTotalSize
+                      ? `Объем всех вложении не должен превышать 20 МБ`
+                      : ''}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -162,4 +174,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default MailSender;

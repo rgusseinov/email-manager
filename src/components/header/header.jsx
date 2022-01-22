@@ -9,10 +9,10 @@ function Header() {
     <div className="header">
       <div className="container">
         <div className="header__row">
-          <img src={Ellipse} className="header-logo__part" alt="" />
-          <img src={Rectangle} className="header-logo__part" alt="" />
-          <img src={Ellipse} className="header-logo__part" alt="" />
-          <img src={Rectangle2} className="header-logo__part" alt="" />
+          <img src={Ellipse} className="header-logo__part" alt="Ellipse" />
+          <img src={Rectangle} className="header-logo__part" alt="Rectangle" />
+          <img src={Ellipse} className="header-logo__part" alt="Ellipse" />
+          <img src={Rectangle2} className="header-logo__part" alt="Rectangle2" />
         </div>
       </div>
     </div>
