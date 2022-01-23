@@ -7,7 +7,6 @@ function App() {
   const handleDragStart = (e) => {
     e.preventDefault();
   };
-
   return (
     <div className="app" onDragStart={handleDragStart}>
       <div className="content">

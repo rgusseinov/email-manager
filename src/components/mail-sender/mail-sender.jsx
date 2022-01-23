@@ -23,7 +23,6 @@ function MailSender() {
     preventDefaults,
     fileList
   } = useForms(fileRef, overlayRef);
-  console.log(fileList);
   return (
     <div className="main" onDragOver={handleDragOver}>
       <div className="container">
@@ -141,7 +140,7 @@ function MailSender() {
                       ? `Максимальный размер одного файла не должен превышать 5 МБ`
                       : ''}
                     <br />
-                    {attachmentsLimitInfo.allowedAttachmentsTotalSize
+                    {attachmentsLimitInfo.totalAttachmentsSizeExceeded
                       ? `Объем всех вложении не должен превышать 20 МБ`
                       : ''}
                   </div>
@@ -151,9 +150,10 @@ function MailSender() {
           </div>
           <div className="main__row">
             <div className="attachment">
-              {fileList.map((file, index) => (
+              {fileList.map(({ file, id }) => (
                 <AttachmentItem
-                  key={index}
+                  key={id}
+                  id={id}
                   file={file}
                   onRemoveAttachment={handleRemoveAttachment}
                 />
