@@ -1,15 +1,18 @@
 import Header from './components/header/header';
-import Main from './components/main/main';
-import MessageStatus from './components/send-history/send-history';
+import MailSender from './components/mail-sender/mail-sender';
+// import MessageStatus from './components/message-status/message-status';
 import '../src/scss/app.scss';
 
 function App() {
+  const handleDragStart = (e) => {
+    e.preventDefault();
+  };
   return (
-    <div className="app">
+    <div className="app" onDragStart={handleDragStart}>
       <div className="content">
         <Header />
-        <Main />
-        <MessageStatus />
+        <MailSender />
+        {/* <MessageStatus /> */}
       </div>
     </div>
   );

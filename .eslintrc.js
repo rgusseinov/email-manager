@@ -14,6 +14,8 @@ module.exports = {
   plugins: ['react'],
   rules: {
     semi: ['error', 'always'],
-    'react/react-in-jsx-scope': 'off'
+    'react/react-in-jsx-scope': 'off',
+    'prettier/prettier': ['error', { endOfLine: 'auto' }],
+    'react/prop-types': 'off'
   }
 };

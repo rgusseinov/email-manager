@@ -1,10 +1,11 @@
 .header {
-  padding: 40px 0 20px 0;
+  padding-top: 40px;
+  padding-bottom: 20px;
 
   &__row {
     display: flex;
-  
-   img {
+
+    img {
       padding-left: 10px;
 
       &:first-child {
