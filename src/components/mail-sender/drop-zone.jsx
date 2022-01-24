@@ -1,9 +1,9 @@
 import React from 'react';
 
-function DropZone({ overlayRef, onDragEnter, onDragOver, onDragLeave, onDrop }) {
+function DropZone({ dropZoneRef, onDragEnter, onDragOver, onDragLeave, onDrop }) {
   return (
     <div
-      ref={overlayRef}
+      ref={dropZoneRef}
       className="overlay hide"
       onDragOver={onDragOver}
       onDragEnter={onDragEnter}

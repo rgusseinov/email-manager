@@ -12,3 +12,7 @@ export const truncateString = (value, num) => {
     ? value
     : value.slice(0, 19) + '...' + value.slice(value.indexOf('.'), value.length);
 };
+
+export const getTotalAttachmentsSize = (attachmentList) => {
+  return attachmentList.reduce((acc, { attachment }) => (acc += attachment.size), 0);
+};

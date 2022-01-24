@@ -1,28 +1,29 @@
 import { useEffect, useState } from 'react';
-import { ATTACHMENT_SIZE_LIMIT, isTotalAttachmentsSizeExceeded } from '../utils/form';
+import {
+  ATTACHMENT_SIZE_LIMIT,
+  getTotalAttachmentsSize,
+  isTotalAttachmentsSizeExceeded
+} from '../utils/form';
 import { validate } from '../utils/form-validation';
 
-const useForm = (fileRef, overlayRef) => {
-  const [field, setField] = useState({});
+const useForm = (fileRef, dropZoneRef) => {
+  const [fieldData, setFieldData] = useState({});
   const [errorInfo, setErrorInfo] = useState({});
-  const [fileList, setFileList] = useState([]);
+  const [attachmentList, setAttachmentList] = useState([]);
   const [attachmentsLimitInfo, setAttachmentsLimitInfo] = useState({});
 
   useEffect(() => {
-    const totalAttachmentsSize = fileList.reduce(function (acc, { file }) {
-      return (acc += file.size);
-    }, 0);
-    console.log(totalAttachmentsSize);
+    const totalAttachmentsSize = getTotalAttachmentsSize(attachmentList);
     setAttachmentsLimitInfo((prevState) => {
       const totalAttachmentsSizeExceeded = isTotalAttachmentsSizeExceeded(totalAttachmentsSize);
       return { ...prevState, totalAttachmentsSizeExceeded };
     });
-  }, [fileList]);
+  }, [attachmentList]);
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
 
-    setField((prevState) => ({
+    setFieldData((prevState) => ({
       ...prevState,
       [name]: value
     }));
@@ -30,7 +31,7 @@ const useForm = (fileRef, overlayRef) => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const { isValid, errors } = validate(field);
+    const { isValid, errors } = validate(fieldData);
 
     if (isValid) {
       alert(`Success! All fields properly filled.`);
@@ -42,33 +43,9 @@ const useForm = (fileRef, overlayRef) => {
 
   const handleSelectFile = () => fileRef.current.click();
 
-  const handleSelectFileChange = (evt) => {
-    const fileListArr = [];
-    const files = Array.from(evt.target.files);
-
-    let noOfAttachmentsExceededLimit = 0;
-    let totalAttachmentsSize = 0;
-
-    files.forEach((file) => {
-      if (file.size <= ATTACHMENT_SIZE_LIMIT) {
-        totalAttachmentsSize += file.size;
-        fileListArr.push({
-          id: Math.random().toString().slice(2, 6),
-          file
-        });
-      } else {
-        noOfAttachmentsExceededLimit++;
-      }
-    });
-
-    setAttachmentsLimitInfo((prevState) => {
-      const totalAttachmentsSizeExceeded = isTotalAttachmentsSizeExceeded(totalAttachmentsSize);
-      return { ...prevState, totalAttachmentsSizeExceeded, noOfAttachmentsExceededLimit };
-    });
-
-    setFileList((prevState) => {
-      return [...prevState, ...fileListArr];
-    });
+  const handleSelectFileChange = (e) => {
+    const files = Array.from(e.target.files);
+    addAttachments(files);
   };
 
   const preventDefaults = (e) => {
@@ -79,59 +56,63 @@ const useForm = (fileRef, overlayRef) => {
   // Show drag & drop zone
   const handleDragOver = (e) => {
     e.preventDefault();
-    overlayRef.current.classList.remove('hide');
+    dropZoneRef.current.classList.remove('hide');
   };
 
   // Close drag & drop zone
   const handleDragLeave = (e) => {
     e.preventDefault();
-    if (!overlayRef.current.classList.contains('hide')) {
-      overlayRef.current.classList.add('hide');
+    if (!dropZoneRef.current.classList.contains('hide')) {
+      dropZoneRef.current.classList.add('hide');
     }
   };
 
   const handleDrop = (e) => {
     e.preventDefault();
     const { files } = e.dataTransfer;
-    overlayRef.current.classList.add('hide');
+    dropZoneRef.current.classList.add('hide');
 
-    const fileListArr = [];
-    let fileList = Array.from(files);
-
-    let noOfAttachmentsExceededLimit = 0;
-    let totalAttachmentsSize = 0;
-
-    fileList.forEach((file) => {
-      if (file.size <= ATTACHMENT_SIZE_LIMIT) {
-        totalAttachmentsSize += file.size;
-        fileListArr.push({
-          id: Math.random().toString().slice(2, 6),
-          file
-        });
-      } else {
-        noOfAttachmentsExceededLimit++;
-      }
-    });
-    setAttachmentsLimitInfo((prevState) => {
-      const totalAttachmentsSizeExceeded = isTotalAttachmentsSizeExceeded(totalAttachmentsSize);
-      return { ...prevState, totalAttachmentsSizeExceeded, noOfAttachmentsExceededLimit };
-    });
-
-    setFileList((prevState) => {
-      return [...prevState, ...fileListArr];
-    });
+    let attachmentList = Array.from(files);
+    addAttachments(attachmentList);
   };
 
   const handleRemoveAttachment = (e) => {
     if (e.target.parentElement.dataset.id) {
       const fileId = e.target.parentElement.dataset.id;
-      const filteredItems = fileList.filter((file) => file.id != fileId);
-      setFileList(filteredItems);
+      const filteredItems = attachmentList.filter((attachment) => attachment.id != fileId);
+      setAttachmentList(filteredItems);
     }
   };
 
+  const addAttachments = (attachments) => {
+    const attachmentListArr = [];
+    let noOfAttachmentsExceededLimit = 0;
+    let totalAttachmentsSize = 0;
+
+    attachments.forEach((file) => {
+      if (file.size <= ATTACHMENT_SIZE_LIMIT) {
+        totalAttachmentsSize += file.size;
+        attachmentListArr.push({
+          id: Math.random().toString().slice(2, 6),
+          attachment: file
+        });
+      } else {
+        noOfAttachmentsExceededLimit++;
+      }
+    });
+
+    setAttachmentsLimitInfo((prevState) => {
+      const totalAttachmentsSizeExceeded = isTotalAttachmentsSizeExceeded(totalAttachmentsSize);
+      return { ...prevState, totalAttachmentsSizeExceeded, noOfAttachmentsExceededLimit };
+    });
+
+    setAttachmentList((prevState) => {
+      return [...prevState, ...attachmentListArr];
+    });
+  };
+
   return {
-    fileList,
+    attachmentList,
     attachmentsLimitInfo,
     errorInfo,
     handleFormChange,
