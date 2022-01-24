@@ -45,7 +45,7 @@ const useForm = (fileRef, dropZoneRef) => {
 
   const handleSelectFileChange = (e) => {
     const files = Array.from(e.target.files);
-    addAttachments(files);
+    renderAttachments(files);
   };
 
   const preventDefaults = (e) => {
@@ -70,21 +70,23 @@ const useForm = (fileRef, dropZoneRef) => {
   const handleDrop = (e) => {
     e.preventDefault();
     const { files } = e.dataTransfer;
-    dropZoneRef.current.classList.add('hide');
-
     let attachmentList = Array.from(files);
-    addAttachments(attachmentList);
+    renderAttachments(attachmentList);
+
+    dropZoneRef.current.classList.add('hide');
   };
 
   const handleRemoveAttachment = (e) => {
     if (e.target.parentElement.dataset.id) {
-      const fileId = e.target.parentElement.dataset.id;
-      const filteredItems = attachmentList.filter((attachment) => attachment.id != fileId);
+      const currentAttachmentId = e.target.parentElement.dataset.id;
+      const filteredItems = attachmentList.filter(
+        (attachment) => attachment.id != currentAttachmentId
+      );
       setAttachmentList(filteredItems);
     }
   };
 
-  const addAttachments = (attachments) => {
+  const renderAttachments = (attachments) => {
     const attachmentListArr = [];
     let noOfAttachmentsExceededLimit = 0;
     let totalAttachmentsSize = 0;
