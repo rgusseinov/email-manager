@@ -1,22 +1,29 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import useForm from '../../hooks/use-form';
+import DropZone from './drop-zone';
 import AttachmentItem from './attachment-item';
 import attachmentIcon from '../../assets/images/attachment.svg';
 import '../../scss/mail-sender.scss';
 
-function MailForm({
-  fileList,
-  fileRef,
-  attachmentsLimitInfo,
-  handleDrop,
-  handleSelectFile,
-  handleSelectFileChange,
-  handleRemoveAttachment,
-  preventDefaults
-}) {
-  const { error, handleFormChange, handleFormSubmit } = useForm();
+function MailForm() {
+  const fileRef = createRef();
+  const overlayRef = createRef();
+  const {
+    fileList,
+    attachmentsLimitInfo,
+    errorInfo,
+    handleFormChange,
+    handleFormSubmit,
+    handleSelectFile,
+    handleSelectFileChange,
+    handleDrop,
+    handleDragOver,
+    handleDragLeave,
+    handleRemoveAttachment,
+    preventDefaults
+  } = useForm(fileRef, overlayRef);
   return (
-    <div className="container">
+    <div className="container" onDragOver={handleDragOver}>
       <div className="main__title">Отправлялка сообщений</div>
       <form onChange={handleFormChange} onSubmit={handleFormSubmit}>
         <div className="main__row">
@@ -29,7 +36,7 @@ function MailForm({
                 className="main__field-group-left"
                 placeholder="Имя"
               />
-              <div className="main__message error">{error['sendByName']}</div>
+              <div className="main__message error">{errorInfo['sendByName']}</div>
             </div>
             <div className="main__field-group">
               <input
@@ -38,7 +45,7 @@ function MailForm({
                 className="main__field-group-right"
                 placeholder="Email"
               />
-              <div className="main__message error">{error['sendByEmail']}</div>
+              <div className="main__message error">{errorInfo['sendByEmail']}</div>
             </div>
           </div>
         </div>
@@ -53,7 +60,7 @@ function MailForm({
                 className="main__field-group-left"
                 placeholder="Имя"
               />
-              <div className="main__message error">{error['sendToName']}</div>
+              <div className="main__message error">{errorInfo['sendToName']}</div>
             </div>
             <div className="main__field-group">
               <input
@@ -62,7 +69,7 @@ function MailForm({
                 className="main__field-group-right"
                 placeholder="Email"
               />
-              <div className="main__message error">{error['sendToEmail']}</div>
+              <div className="main__message error">{errorInfo['sendToEmail']}</div>
             </div>
           </div>
         </div>
@@ -77,7 +84,7 @@ function MailForm({
                 className="main__field-group-single"
                 placeholder="Моя тема письма"
               />
-              <div className="main__message error">{error['subject']}</div>
+              <div className="main__message error">{errorInfo['subject']}</div>
             </div>
           </div>
         </div>
@@ -87,7 +94,7 @@ function MailForm({
           <div className="main__field-row">
             <div className="main__field-group single">
               <textarea className="main__field-group-single" name="message"></textarea>
-              <div className="main__message error">{error['message']}</div>
+              <div className="main__message error">{errorInfo['message']}</div>
             </div>
           </div>
         </div>
@@ -150,6 +157,14 @@ function MailForm({
             ))}
           </div>
         </div>
+        <DropZone
+          overlayRef={overlayRef}
+          preventDefaults={preventDefaults}
+          onDragEnter={preventDefaults}
+          onDragOver={preventDefaults}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+        />
       </form>
     </div>
   );

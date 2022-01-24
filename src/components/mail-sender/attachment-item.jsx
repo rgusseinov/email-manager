@@ -1,10 +1,10 @@
 import React from 'react';
-import { truncateString } from '../../utils/form';
+import { ATTACHMENT_NAME_LIMIT, truncateString } from '../../utils/form';
 import removeIcon from '../../assets/images/trash.svg';
 import attachmentIcon from '../../assets/images/attachment.svg';
 
 function AttachmentItem({ file, id, onRemoveAttachment }) {
-  const truncatedName = truncateString(file.name, 27);
+  const truncatedName = truncateString(file.name, ATTACHMENT_NAME_LIMIT);
   return (
     <div className="attachment__item" onClick={onRemoveAttachment}>
       <div className="attachment__row">
