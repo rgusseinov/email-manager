@@ -1,17 +1,13 @@
 import React from 'react';
 
-function DropZone({ overlayRef, preventDefaults, onDragEnter, onDragLeave, onDrop }) {
-  const onDragStart = (e) => {
-    e.preventDefault();
-    // console.log(`start:`, e);
-  };
+function DropZone({ overlayRef, preventDefaults, onDragLeave, onDrop }) {
   return (
     <div
       ref={overlayRef}
       className="overlay hide"
-      onDragStart={onDragStart}
+      onDragStart={preventDefaults}
       onDragOver={preventDefaults}
-      onDragEnter={onDragEnter}
+      onDragEnter={preventDefaults}
       onDragLeave={onDragLeave}
       onDrop={onDrop}>
       <div className="overlay__content">

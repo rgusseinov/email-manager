@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ATTACHMENT_SIZE_LIMIT, isTotalAttachmentsSizeExceeded } from '../utils/form';
-import { validate } from '../utils/form-validation';
 
-const useForms = (fileRef, overlayRef) => {
-  const [field, setField] = useState({});
-  const [error, setError] = useState({});
+const useMailSender = (fileRef, overlayRef) => {
   const [fileList, setFileList] = useState([]);
   const [attachmentsLimitInfo, setAttachmentsLimitInfo] = useState({});
 
@@ -12,6 +9,7 @@ const useForms = (fileRef, overlayRef) => {
     const totalAttachmentsSize = fileList.reduce(function (acc, { file }) {
       return (acc += file.size);
     }, 0);
+    console.log(totalAttachmentsSize);
     setAttachmentsLimitInfo((prevState) => {
       const totalAttachmentsSizeExceeded = isTotalAttachmentsSizeExceeded(totalAttachmentsSize);
       return { ...prevState, totalAttachmentsSizeExceeded };
@@ -103,38 +101,15 @@ const useForms = (fileRef, overlayRef) => {
     });
   };
 
-  // Form field handlers
-  const handleFormChange = (e) => {
-    const { name, value } = e.target;
-
-    setField((prevState) => ({
-      ...prevState,
-      [name]: value
-    }));
-  };
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    const { isValid, errors } = validate(field);
-
-    if (isValid) {
-      console.log(`Success! All fields properly filled.`);
-      setError({});
-    } else {
-      setError(errors);
-    }
-  };
-
   const handleRemoveAttachment = (e) => {
     if (e.target.parentElement.dataset.id) {
       const fileId = e.target.parentElement.dataset.id;
-      const filteredItems = fileList.filter((file) => file.id !== fileId);
+      const filteredItems = fileList.filter((file) => file.id != fileId);
       setFileList(filteredItems);
     }
   };
 
   return {
-    error,
     fileList,
     attachmentsLimitInfo,
     handleSelectFile,
@@ -143,10 +118,8 @@ const useForms = (fileRef, overlayRef) => {
     handleDragOver,
     handleDragLeave,
     handleDrop,
-    handleFormChange,
-    handleFormSubmit,
     handleRemoveAttachment
   };
 };
 
-export default useForms;
+export default useMailSender;

@@ -1,14 +1,16 @@
 import React from 'react';
+import { truncateString } from '../../utils/form';
 import removeIcon from '../../assets/images/trash.svg';
 import attachmentIcon from '../../assets/images/attachment.svg';
 
 function AttachmentItem({ file, id, onRemoveAttachment }) {
+  const truncatedName = truncateString(file.name, 27);
   return (
     <div className="attachment__item" onClick={onRemoveAttachment}>
       <div className="attachment__row">
         <div className="attachment__image">
           <img src={attachmentIcon} alt="Файл" draggable="false" />
-          <span draggable="false"> {file.name} </span>
+          <span draggable="false"> {truncatedName} </span>
         </div>
         <div className="attachment__icon" data-id={`${id}`}>
           <img src={removeIcon} className="icon" alt="Удалить" />
