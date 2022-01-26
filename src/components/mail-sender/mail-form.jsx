@@ -110,6 +110,18 @@ function MailForm() {
             </div>
           </div>
           <div className="main__row">
+            <div className="attachment">
+              {attachmentList.map(({ attachment, id }) => (
+                <AttachmentItem
+                  key={id}
+                  id={id}
+                  attachment={attachment}
+                  onRemoveAttachment={handleRemoveAttachment}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="main__row">
             <div
               className="upload"
               onDragEnter={preventDefaults}
@@ -144,18 +156,6 @@ function MailForm() {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div className="main__row">
-            <div className="attachment">
-              {attachmentList.map(({ attachment, id }) => (
-                <AttachmentItem
-                  key={id}
-                  id={id}
-                  attachment={attachment}
-                  onRemoveAttachment={handleRemoveAttachment}
-                />
-              ))}
             </div>
           </div>
           <DropZone
