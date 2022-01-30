@@ -4,11 +4,8 @@ import {
   getTotalAttachmentsSize,
   isTotalAttachmentsSizeExceeded
 } from '../utils/form';
-import { validate } from '../utils/form-validation';
 
 const useForm = (fileRef, dropZoneRef) => {
-  const [fieldData, setFieldData] = useState({});
-  const [errorInfo, setErrorInfo] = useState({});
   const [attachmentList, setAttachmentList] = useState([]);
   const [attachmentsLimitInfo, setAttachmentsLimitInfo] = useState({});
 
@@ -19,27 +16,6 @@ const useForm = (fileRef, dropZoneRef) => {
       return { ...prevState, totalAttachmentsSizeExceeded };
     });
   }, [attachmentList]);
-
-  const handleFormChange = (e) => {
-    const { name, value } = e.target;
-
-    setFieldData((prevState) => ({
-      ...prevState,
-      [name]: value
-    }));
-  };
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    const { isValid, errors } = validate(fieldData);
-
-    if (isValid) {
-      alert(`Success! All fields properly filled.`);
-      setErrorInfo({});
-    } else {
-      setErrorInfo(errors);
-    }
-  };
 
   const handleSelectFile = () => fileRef.current.click();
 
@@ -116,9 +92,6 @@ const useForm = (fileRef, dropZoneRef) => {
   return {
     attachmentList,
     attachmentsLimitInfo,
-    errorInfo,
-    handleFormChange,
-    handleFormSubmit,
     handleSelectFile,
     handleSelectFileChange,
     handleDrop,
