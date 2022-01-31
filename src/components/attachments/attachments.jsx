@@ -4,6 +4,7 @@ import useAttachments from '../../hooks/use-attachments';
 import DropZone from './drop-zone';
 import AttachmentItem from './attachment-item';
 import FileUpload from './file-upload';
+import { useSelector } from 'react-redux';
 
 function Attachments() {
   const fileRef = createRef();
@@ -15,6 +16,8 @@ function Attachments() {
     handleSelectFileChange,
     handleSelectFile
   } = useAttachments(fileRef, dropZoneRef);
+  const emails = useSelector((state) => state.emails);
+  console.log(`emails`, emails);
   return (
     <Fragment>
       <div className="main__row">

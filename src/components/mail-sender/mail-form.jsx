@@ -1,11 +1,14 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Formik } from 'formik';
 import validationSchema from '../../utils/form-validation';
 import Attachments from '../attachments/attachments';
 import useForm from '../../hooks/use-form';
+import { addEmail } from '../../store/emailSlice';
 import '../../scss/mail-sender.scss';
 
 function MailForm() {
+  const dispatch = useDispatch();
   const { containerRef, handleDragOver } = useForm();
   return (
     <div className="main">
@@ -13,16 +16,17 @@ function MailForm() {
         <div className="main__title">Отправлялка сообщений</div>
         <Formik
           initialValues={{
-            sendByName: '',
-            sendToName: '',
-            sendByEmail: '',
-            sendToEmail: '',
-            subject: '',
-            message: ''
+            sendByName: 'Ruslan',
+            sendToName: 'Gusseinov',
+            sendByEmail: 'sdfsfd@mail.ru',
+            sendToEmail: 'retert@mail.ru',
+            subject: 'The new email',
+            message: 'fs fsdf lsfs ;flksf'
           }}
           validationSchema={validationSchema}
           onSubmit={(values) => {
-            console.log(values);
+            // console.log(values.sendByName);
+            dispatch(addEmail(values.sendByName));
           }}>
           {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => {
             return (
