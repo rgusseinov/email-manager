@@ -1,7 +1,5 @@
 import React from 'react';
-import Ellipse from '../../assets/images/Ellipseellipse.svg';
-import Rectangle from '../../assets/images/Rectanglerectanble.svg';
-import Rectangle2 from '../../assets/images/Rectanglerectangle-2.svg';
+import Logo from '../../assets/images/logo.svg';
 import '../../scss/header.scss';
 
 function Header() {
@@ -9,10 +7,7 @@ function Header() {
     <div className="header">
       <div className="container">
         <div className="header__row">
-          <img src={Ellipse} className="header-logo__part" alt="Ellipse" />
-          <img src={Rectangle} className="header-logo__part" alt="Rectangle" />
-          <img src={Ellipse} className="header-logo__part" alt="Ellipse" />
-          <img src={Rectangle2} className="header-logo__part" alt="Rectangle2" />
+          <img src={Logo} className="header-logo__part" alt="Logo" />
         </div>
       </div>
     </div>

@@ -1,13 +1,15 @@
 import React from 'react';
+import useDropZone from '../../hooks/use-drop-zone';
 
-function DropZone({ overlayRef, onDragEnter, onDragOver, onDragLeave, onDrop }) {
+function DropZone({ dropZoneRef, onDrop }) {
+  const { preventDefaults, handleDragLeave } = useDropZone(dropZoneRef);
   return (
     <div
-      ref={overlayRef}
+      ref={dropZoneRef}
       className="overlay hide"
-      onDragOver={onDragOver}
-      onDragEnter={onDragEnter}
-      onDragLeave={onDragLeave}
+      onDragOver={preventDefaults}
+      onDragEnter={preventDefaults}
+      onDragLeave={handleDragLeave}
       onDrop={onDrop}>
       <div className="overlay__content">
         <h3 className="overlay__title"> Бросайте файлы сюда, я ловлю </h3>
