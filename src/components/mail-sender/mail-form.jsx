@@ -2,12 +2,14 @@ import React from 'react';
 import { Formik } from 'formik';
 import validationSchema from '../../utils/form-validation';
 import Attachments from '../attachments/attachments';
+import useForm from '../../hooks/use-form';
 import '../../scss/mail-sender.scss';
 
 function MailForm() {
+  const { containerRef, handleDragOver } = useForm();
   return (
     <div className="main">
-      <div className="container" onDragOver={() => {}}>
+      <div className="container" ref={containerRef} onDragOver={handleDragOver}>
         <div className="main__title">Отправлялка сообщений</div>
         <Formik
           initialValues={{
