@@ -1,15 +1,41 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import { Formik } from 'formik';
 import validationSchema from '../../utils/form-validation';
 import Attachments from '../attachments/attachments';
 import useForm from '../../hooks/use-form';
-import { addEmail } from '../../store/emailSlice';
+// import { addEmail } from '../../store/emailSlice';
 import '../../scss/mail-sender.scss';
+import { sendFormData } from '../../api/api';
+import Sendsay from 'sendsay-api';
 
 function MailForm() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { containerRef, handleDragOver } = useForm();
+
+  var sendsay = new Sendsay({
+    auth: {
+      login: 'Ruska0688',
+      sublogin: 'optional',
+      password: 'Abcde777!!@#'
+    }
+  });
+  sendsay.request({ action: 'sys.settings.get', list: ['about.id'] }).then(function (res) {
+    console.log(res.list['about.id']);
+  });
+
+  const sendsay1 = new Sendsay();
+  sendsay1
+    .login({
+      login: 'Ruska0688',
+      sublogin: 'optional',
+      password: 'Abcde777!!@#'
+    })
+    .then(function (res) {
+      // The sendsay instance is authenticated. Do a request.
+      console.log(res);
+    });
+
   return (
     <div className="main">
       <div className="container" ref={containerRef} onDragOver={handleDragOver}>
@@ -18,15 +44,26 @@ function MailForm() {
           initialValues={{
             sendByName: 'Ruslan',
             sendToName: 'Gusseinov',
-            sendByEmail: 'sdfsfd@mail.ru',
-            sendToEmail: 'retert@mail.ru',
-            subject: 'The new email',
-            message: 'fs fsdf lsfs ;flksf'
+            sendByEmail: 'webelive24@gmail.c',
+            sendToEmail: 'r.gusseinov@mail.ru',
+            subject: 'This is the subject of email',
+            message: 'Hello world! im simple email text in text arear'
           }}
           validationSchema={validationSchema}
           onSubmit={(values) => {
+            sendFormData({
+              subject: values.subject,
+              fromName: values.sendByName,
+              fromEmail: values.sendByEmail,
+              toName: values.sendToName,
+              toEmail: values.sendToEmail,
+              message: values.message,
+              attaches: [{ name: 'Email1', content: 'dsfsf', encoding: 'base64' }]
+            }).then((req) => {
+              console.log(req);
+            });
             // console.log(values.sendByName);
-            dispatch(addEmail(values.sendByName));
+            // dispatch(addEmail(values.sendByName));
           }}>
           {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => {
             return (
