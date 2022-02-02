@@ -7,35 +7,10 @@ import useForm from '../../hooks/use-form';
 // import { addEmail } from '../../store/emailSlice';
 import '../../scss/mail-sender.scss';
 import { sendFormData } from '../../api/api';
-import Sendsay from 'sendsay-api';
 
 function MailForm() {
   // const dispatch = useDispatch();
   const { containerRef, handleDragOver } = useForm();
-
-  var sendsay = new Sendsay({
-    auth: {
-      login: 'Ruska0688',
-      sublogin: 'optional',
-      password: 'Abcde777!!@#'
-    }
-  });
-  sendsay.request({ action: 'sys.settings.get', list: ['about.id'] }).then(function (res) {
-    console.log(res.list['about.id']);
-  });
-
-  const sendsay1 = new Sendsay();
-  sendsay1
-    .login({
-      login: 'Ruska0688',
-      sublogin: 'optional',
-      password: 'Abcde777!!@#'
-    })
-    .then(function (res) {
-      // The sendsay instance is authenticated. Do a request.
-      console.log(res);
-    });
-
   return (
     <div className="main">
       <div className="container" ref={containerRef} onDragOver={handleDragOver}>
@@ -60,7 +35,12 @@ function MailForm() {
               message: values.message,
               attaches: [{ name: 'Email1', content: 'dsfsf', encoding: 'base64' }]
             }).then((req) => {
+              // const id = req['request.id'];
+              // const trackId = req['track.id'];
               console.log(req);
+              /* getTrackId(id).then((r) => {
+                console.log(r);
+              }); */
             });
             // console.log(values.sendByName);
             // dispatch(addEmail(values.sendByName));

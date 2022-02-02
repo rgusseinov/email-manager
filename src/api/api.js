@@ -1,8 +1,3 @@
-import Sendsay from 'sendsay-api';
-
-const apiKey = 'Vsdfsfsfdf45rt#re4hfghf4f6hs651DF1df1sdf121sdf12s__3412fds';
-const sendsay = new Sendsay({ apiKey });
-
 const transformData = ({ subject, fromName, fromEmail, toName, toEmail, message, attaches }) => {
   return {
     action: 'issue.send.test',
@@ -24,37 +19,33 @@ const transformData = ({ subject, fromName, fromEmail, toName, toEmail, message,
 };
 
 export const sendFormData = (data) => {
-  return sendsay
-    .request(transformData(data))
-    .then((res) => res)
-    .catch((err) => err);
+  const params = transformData(data);
+  const bodyParams = 'apiversion=100&json=1&request=' + encodeURIComponent(JSON.stringify(params));
+
+  const request = fetch('https://api.sendsay.ru/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: bodyParams
+  }).then((res) => {
+    return res.json();
+  });
+  return request;
 };
 
-export const getMessageInfo = (id) => {
-  return sendsay
-    .request({ action: 'track.get', id })
-    .then((res) => res)
-    .catch((err) => err);
-};
-
-export const resetPassword = () => {
-  return sendsay
-    .request({
-      action: 'sys.user.set',
-      id: 'Ruslan0688',
-      status: '0',
-      email: 'r.gusseinov@mail.ru',
-      name: 'Ruslan',
-      password: 'Abcde'
-    })
-    .then((res) => res);
-};
-
-export const requestData = () => {
-  return sendsay
-    .request({
-      action: 'sys.settings.get',
-      list: ['about.id']
-    })
-    .then((res) => res);
+export const getTrackId = (id) => {
+  const bodyParams =
+    'apiversion=100&json=1&request=' +
+    encodeURIComponent(JSON.stringify({ action: 'track.get', id }));
+  const request = fetch('https://api.sendsay.ru/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: bodyParams
+  }).then((res) => {
+    return res.json();
+  });
+  return request;
 };
