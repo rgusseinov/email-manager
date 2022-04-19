@@ -16,3 +16,18 @@ export const truncateString = (value, num) => {
 export const getTotalAttachmentsSize = (attachmentList) => {
   return attachmentList.reduce((acc, { attachment }) => (acc += attachment.size), 0);
 };
+
+/* subject: values.subject,
+fromName: values.sendByName,
+fromEmail: values.sendByEmail,
+toName: values.sendToName,
+toEmail: values.sendToEmail,
+message: values.message,
+attaches: [{ name: 'Email1', content: 'dsfsf', encoding: 'base64' }] */
+
+export const addFormDataToStorage = (data) => {
+  const item = localStorage.getItem('emails');
+  const newArr = item.push(data);
+  console.log(data);
+  localStorage.setItem('emails', newArr);
+};

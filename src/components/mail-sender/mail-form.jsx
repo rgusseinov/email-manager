@@ -6,7 +6,8 @@ import Attachments from '../attachments/attachments';
 import useForm from '../../hooks/use-form';
 // import { addEmail } from '../../store/emailSlice';
 import '../../scss/mail-sender.scss';
-import { sendFormData } from '../../api/api';
+// import { sendFormData } from '../../api/api';
+import { addFormDataToStorage } from '../../utils/form';
 
 function MailForm() {
   // const dispatch = useDispatch();
@@ -26,7 +27,7 @@ function MailForm() {
           }}
           validationSchema={validationSchema}
           onSubmit={(values) => {
-            sendFormData({
+            addFormDataToStorage({
               subject: values.subject,
               fromName: values.sendByName,
               fromEmail: values.sendByEmail,
@@ -34,16 +35,7 @@ function MailForm() {
               toEmail: values.sendToEmail,
               message: values.message,
               attaches: [{ name: 'Email1', content: 'dsfsf', encoding: 'base64' }]
-            }).then((req) => {
-              // const id = req['request.id'];
-              // const trackId = req['track.id'];
-              console.log(req);
-              /* getTrackId(id).then((r) => {
-                console.log(r);
-              }); */
             });
-            // console.log(values.sendByName);
-            // dispatch(addEmail(values.sendByName));
           }}>
           {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => {
             return (
