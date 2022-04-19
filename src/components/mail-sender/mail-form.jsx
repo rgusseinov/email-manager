@@ -7,10 +7,21 @@ import useForm from '../../hooks/use-form';
 // import { addEmail } from '../../store/emailSlice';
 import '../../scss/mail-sender.scss';
 import { sendFormData } from '../../api/api';
+import Sendsay from 'sendsay-api';
 
 function MailForm() {
   // const dispatch = useDispatch();
   const { containerRef, handleDragOver } = useForm();
+  var sendsay = new Sendsay({
+    auth: {
+      login: 'r.gusseinov@mail.ru',
+      sublogin: 'optional',
+      password: 'ore3Xafex'
+    }
+  });
+  sendsay.request({ action: 'sys.settings.get', list: ['about.id'] }).then(function (res) {
+    console.log(res.list['about.id']);
+  });
   return (
     <div className="main">
       <div className="container" ref={containerRef} onDragOver={handleDragOver}>

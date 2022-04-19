@@ -24,9 +24,6 @@ export const sendFormData = (data) => {
 
   const request = fetch('https://api.sendsay.ru/', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
     body: bodyParams
   }).then((res) => {
     return res.json();
