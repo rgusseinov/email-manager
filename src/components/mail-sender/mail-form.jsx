@@ -6,22 +6,11 @@ import Attachments from '../attachments/attachments';
 import useForm from '../../hooks/use-form';
 // import { addEmail } from '../../store/emailSlice';
 import '../../scss/mail-sender.scss';
-import { sendFormData } from '../../api/api';
-import Sendsay from 'sendsay-api';
+import { addFormDataToStorage } from '../../utils/form';
 
 function MailForm() {
   // const dispatch = useDispatch();
   const { containerRef, handleDragOver } = useForm();
-  var sendsay = new Sendsay({
-    auth: {
-      login: 'r.gusseinov@mail.ru',
-      sublogin: 'optional',
-      password: 'ore3Xafex'
-    }
-  });
-  sendsay.request({ action: 'sys.settings.get', list: ['about.id'] }).then(function (res) {
-    console.log(res.list['about.id']);
-  });
   return (
     <div className="main">
       <div className="container" ref={containerRef} onDragOver={handleDragOver}>
@@ -37,24 +26,8 @@ function MailForm() {
           }}
           validationSchema={validationSchema}
           onSubmit={(values) => {
-            sendFormData({
-              subject: values.subject,
-              fromName: values.sendByName,
-              fromEmail: values.sendByEmail,
-              toName: values.sendToName,
-              toEmail: values.sendToEmail,
-              message: values.message,
-              attaches: [{ name: 'Email1', content: 'dsfsf', encoding: 'base64' }]
-            }).then((req) => {
-              // const id = req['request.id'];
-              // const trackId = req['track.id'];
-              console.log(req);
-              /* getTrackId(id).then((r) => {
-                console.log(r);
-              }); */
-            });
-            // console.log(values.sendByName);
-            // dispatch(addEmail(values.sendByName));
+            addFormDataToStorage(values);
+            //
           }}>
           {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => {
             return (
