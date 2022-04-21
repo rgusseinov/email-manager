@@ -1,18 +1,20 @@
 import Header from './components/header/header';
 import MailForm from './components/mail-sender/mail-form';
-// import MessageStatus from './components/message-status/message-status';
 import '../src/scss/app.scss';
+import MessageSent from './components/message-status/message-sent';
+import { useSelector } from 'react-redux';
 
 function App() {
-  const handleDragStart = (e) => {
-    e.preventDefault();
-  };
+  const { isEmailInQueue } = useSelector((data) => data.emails);
+  const handleDragStart = (e) => e.preventDefault();
+  console.log(`isEmailInQueue`, isEmailInQueue);
   return (
     <div className="app" onDragStart={handleDragStart}>
       <div className="content">
         <Header />
         <MailForm />
-        {/* <MessageStatus /> */}
+        <br />
+        <MessageSent />
       </div>
     </div>
   );
