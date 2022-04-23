@@ -6,10 +6,12 @@ import Attachments from '../attachments/attachments';
 import useForm from '../../hooks/use-form';
 // import { addEmail } from '../../store/emailSlice';
 import '../../scss/mail-sender.scss';
-import { addFormDataToStorage } from '../../utils/form';
+import { addEmail } from '../../store/emailSlice';
+import { useDispatch } from 'react-redux';
+// import { addFormDataToStorage } from '../../utils/form';
 
 function MailForm() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const { containerRef, handleDragOver } = useForm();
   return (
     <div className="main">
@@ -26,8 +28,8 @@ function MailForm() {
           }}
           validationSchema={validationSchema}
           onSubmit={(values) => {
-            addFormDataToStorage(values);
-            //
+            // console.log(values);
+            dispatch(addEmail(values));
           }}>
           {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => {
             return (
