@@ -2,6 +2,7 @@ import Header from './components/header/header';
 import MailForm from './components/mail-sender/mail-form';
 // import MessageStatus from './components/message-status/message-status';
 import '../src/scss/app.scss';
+import MessageSent from './components/message-status/message-sent';
 
 function App() {
   const handleDragStart = (e) => {
@@ -12,6 +13,8 @@ function App() {
       <div className="content">
         <Header />
         <MailForm />
+        <br />
+        <MessageSent />
         {/* <MessageStatus /> */}
       </div>
     </div>
