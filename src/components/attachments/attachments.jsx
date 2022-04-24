@@ -4,20 +4,19 @@ import useAttachments from '../../hooks/use-attachments';
 import DropZone from './drop-zone';
 import AttachmentItem from './attachment-item';
 import FileUpload from './file-upload';
-// import { useSelector } from 'react-redux';
 
 function Attachments() {
   const fileRef = createRef();
   const dropZoneRef = createRef();
   const {
     attachmentList,
+    attachmentsLimitInfo,
     handleDrop,
     handleRemoveAttachment,
     handleSelectFileChange,
     handleSelectFile
   } = useAttachments(fileRef, dropZoneRef);
-  // const emails = useSelector((state) => state.emails);
-  // console.log(`emails`, emails);
+
   return (
     <Fragment>
       <div className="main__row">
@@ -36,6 +35,7 @@ function Attachments() {
       </div>
       <FileUpload
         fileRef={fileRef}
+        attachmentsLimitInfo={attachmentsLimitInfo}
         handleSelectFileChange={handleSelectFileChange}
         handleSelectFile={handleSelectFile}
       />

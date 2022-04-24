@@ -1,5 +1,4 @@
-// eslint-disable-next-line prettier/prettier
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const emailSlice = createSlice({
   name: 'emails',
@@ -9,7 +8,6 @@ const emailSlice = createSlice({
   },
   reducers: {
     addEmail(state, action) {
-      // console.log(`payload:`, action.payload.subject);
       state.isEmailInQueue = true;
       state.emails.push({
         id: new Date().toDateString(),
@@ -18,15 +16,21 @@ const emailSlice = createSlice({
         sendByEmail: action.payload.sendByEmail,
         sendToName: action.payload.sendToName,
         sendToEmail: action.payload.sendToEmail,
-        message: action.payload.message
+        sendDate: new Date().toDateString(),
+        message: action.payload.message,
+        status: 1
       });
     },
     clearQueue(state) {
       if (state.isEmailInQueue) state.isEmailInQueue = false;
+    },
+    updateEmailStatus(state, action) {
+      const emailIndex = state.emails.findIndex((email) => email.status == 1);
+      if (emailIndex != -1) state.emails[emailIndex].status = action.payload;
     }
   }
 });
 
-export const { addEmail, clearQueue } = emailSlice.actions;
+export const { addEmail, clearQueue, updateEmailStatus } = emailSlice.actions;
 
 export default emailSlice.reducer;

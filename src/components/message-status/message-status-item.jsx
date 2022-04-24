@@ -1,13 +1,15 @@
 import React from 'react';
-import '../../scss/send-history.scss';
+import { generateMessageStatus, getMessageStatus, getMonthNameRu } from '../../utils/utils';
 
 function MessageStatusItem({ email }) {
+  const statusName = getMessageStatus[email.status];
+  const statusClass = generateMessageStatus(email.status);
+  const monthNameRu = `${new Date().getDate()} ${getMonthNameRu[new Date().getMonth()]}`;
   return (
     <tr>
-      <tr>
-        <td id={email.id}> 30 сентября </td> <td> {email.subject} </td>
-        <td className="history__status-success"> Отправлено </td>
-      </tr>
+      <td>{monthNameRu}</td>
+      <td>{email.subject}</td>
+      <td className={`history__status-${statusClass}`}>{statusName}</td>
     </tr>
   );
 }

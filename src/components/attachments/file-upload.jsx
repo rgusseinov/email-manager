@@ -1,7 +1,7 @@
 import React from 'react';
 import attachmentIcon from '../../assets/images/attachment.svg';
 
-function FileUpload({ fileRef, handleSelectFileChange, handleSelectFile }) {
+function FileUpload({ fileRef, attachmentsLimitInfo, handleSelectFileChange, handleSelectFile }) {
   const preventDefaults = (e) => {
     e.preventDefault();
   };
@@ -29,15 +29,15 @@ function FileUpload({ fileRef, handleSelectFileChange, handleSelectFile }) {
             </div>
           </div>
           <div className="upload__row">
-            {/* <div className="upload__limit">
-              {attachmentsLimitInfo.noOfAttachmentsExceededLimit
+            <div className="upload__limit">
+              {attachmentsLimitInfo.attachmentsExceededLimit
                 ? `Максимальный размер одного файла не должен превышать 5 МБ`
                 : ''}
               <br />
               {attachmentsLimitInfo.totalAttachmentsSizeExceeded
                 ? `Объем всех вложении не должен превышать 20 МБ`
                 : ''}
-            </div> */}
+            </div>
           </div>
         </div>
       </div>

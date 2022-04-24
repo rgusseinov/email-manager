@@ -51,10 +51,8 @@
       border-top-left-radius: 5px;
       border-bottom-left-radius: 5px;
       &:focus {
-        outline: none;
-        border: 2px solid #a2d2ff;
-        border-top-left-radius: 5px;
-        border-bottom-left-radius: 5px;
+        outline-color: #a2d2ff;
+        border: 1px solid #a2d2ff;
       }
     }
 
@@ -62,19 +60,16 @@
       border-top-right-radius: 5px;
       border-bottom-right-radius: 5px;
       &:focus {
-        outline: none;
-        border: 2px solid #a2d2ff;
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
+        outline-color: #a2d2ff;     
+        border: 1px solid #a2d2ff;
       }
     }
 
     &-single {
       border-radius: 5px;
       &:focus {
-        outline: none;
-        border: 2px solid #a2d2ff;
-        border-radius: 5px;
+        outline-color: #a2d2ff;     
+        border: 1px solid #a2d2ff;
       }
     }
 

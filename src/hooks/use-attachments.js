@@ -21,7 +21,7 @@ const useAttachments = (fileRef, dropZoneRef) => {
 
   const handleSelectFileChange = (e) => {
     const files = Array.from(e.target.files);
-    renderAttachments(files);
+    renderAttachments(files); // render
   };
 
   const handleRemoveAttachment = (e) => {
@@ -38,15 +38,14 @@ const useAttachments = (fileRef, dropZoneRef) => {
     e.preventDefault();
     const { files } = e.dataTransfer;
     let attachmentList = Array.from(files);
-    renderAttachments(attachmentList);
+    renderAttachments(attachmentList); // render
 
-    const overlayBlock = dropZoneRef.current;
-    overlayBlock.classList.add('hide');
+    dropZoneRef.current.classList.toggle('hide');
   };
 
   const renderAttachments = (attachments) => {
     const attachmentListArr = [];
-    let noOfAttachmentsExceededLimit = 0;
+    let attachmentsExceededLimit = false;
     let totalAttachmentsSize = 0;
 
     attachments.forEach((file) => {
@@ -57,13 +56,13 @@ const useAttachments = (fileRef, dropZoneRef) => {
           attachment: file
         });
       } else {
-        noOfAttachmentsExceededLimit++;
+        attachmentsExceededLimit = true;
       }
     });
 
     setAttachmentsLimitInfo((prevState) => {
       const totalAttachmentsSizeExceeded = isTotalAttachmentsSizeExceeded(totalAttachmentsSize);
-      return { ...prevState, totalAttachmentsSizeExceeded, noOfAttachmentsExceededLimit };
+      return { ...prevState, totalAttachmentsSizeExceeded, attachmentsExceededLimit };
     });
 
     setAttachmentList((prevState) => {

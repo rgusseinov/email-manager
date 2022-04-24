@@ -9,19 +9,24 @@ function MessageStatus() {
     <div className="history">
       <div className="container">
         <h2> Отправленные сообщения </h2>
-
-        <table className="history__table">
-          <tbody>
-            <tr className="history__table-header">
-              <td className="history__table-date"> Дата </td>
-              <td className="history__table-subject"> Тема </td>
-              <td className="history__table-status"> Статус </td>
-            </tr>
-          </tbody>
-          {emails.map((email) => (
-            <MessageStatusItem key={email.id} email={email} />
-          ))}
-        </table>
+        {emails.length ? (
+          <table className="history__table">
+            <thead>
+              <tr className="history__table-header">
+                <td className="history__table-date"> Дата </td>
+                <td className="history__table-subject"> Тема </td>
+                <td className="history__table-status"> Статус </td>
+              </tr>
+            </thead>
+            <tbody>
+              {emails.map((email, index) => (
+                <MessageStatusItem key={index} email={email} />
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <p>Сообщения ещё не отправлялись</p>
+        )}
       </div>
     </div>
   );
